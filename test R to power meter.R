@@ -21,7 +21,7 @@ order by AddDate DESC "
 query.1month <- " select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,((kWh_import_H+kWh_import_L)/1000) as 'kWh',MIT..PowerMeterData.AddDate
 from MIT..PowerMeterData (NOLOCK) 
 join MIT..PowerMeterMaster (NOLOCK) on MIT..PowerMeterData.PMMID = MIT..PowerMeterMaster.PMMID 
-where MIT..PowerMeterMaster.MeterName like 'MDB%' and MIT..PowerMeterData.AddDate between (DATEADD(yyyy, -1, GETDATE())) and (GETDATE()) 
+where MIT..PowerMeterMaster.MeterName like 'MDB%' and MIT..PowerMeterData.AddDate between (DATEADD(2017, -1, GETDATE())) and (GETDATE()) 
 order by AddDate DESC "
 
 query.2weeks <- " select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,((kWh_import_H+kWh_import_L)/1000) as 'kWh',MIT..PowerMeterData.AddDate
