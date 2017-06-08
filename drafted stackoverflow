@@ -1,0 +1,67 @@
+Title : How can I combine these two data frames into a data frame by date column?
+
+I chose my recorded data to analyse. The data will be recorded every hour from 2 example devices and there are some little delay problem between recording devices to database server so some hours the data can be recorded at seconds 0 (+-5) e.g. 
+Big problems are 
+1) there are some rows from Date column not equal.
+2) there are some rows
+
+    > class(df1$Date)
+    [1] "POSIXct" "POSIXt" 
+
+    > df1
+                      Date Val   Weekday
+    1  2017-06-08 14:00:04 529  Thursday
+    2  2017-06-08 13:00:04 520  Thursday
+    3  2017-06-08 12:00:04 507  Thursday
+    4  2017-06-08 11:00:04 501  Thursday
+    5  2017-06-08 10:00:04 472  Thursday
+    6  2017-06-08 09:00:04 444  Thursday
+    7  2017-06-08 08:00:04 446  Thursday
+    8  2017-06-08 07:00:04 444  Thursday
+    9  2017-06-08 06:00:04 441  Thursday
+    10 2017-06-08 05:00:04 439  Thursday
+    11 2017-06-08 04:00:04 442  Thursday
+    12 2017-06-08 03:00:04 440  Thursday
+    13 2017-06-08 02:00:04 443  Thursday
+    14 2017-06-08 01:00:04 445  Thursday
+    15 2017-06-08 00:00:04 445  Thursday
+    16 2017-06-07 23:00:04 446 Wednesday
+    17 2017-06-07 22:00:04 445 Wednesday
+    18 2017-06-07 21:00:04 447 Wednesday
+    19 2017-06-07 20:00:04 445 Wednesday
+    20 2017-06-07 19:00:04 451 Wednesday
+    21 2017-06-07 18:00:04 469 Wednesday
+    22 2017-06-07 17:00:04 473 Wednesday
+    23 2017-06-07 16:00:04 510 Wednesday
+    24 2017-06-07 15:00:04 517 Wednesday
+    25 2017-06-07 14:00:04 524 Wednesday
+    
+    > df2
+                      Date Val   Weekday
+    1  2017-06-08 12:00:04 507  Thursday
+    2  2017-06-08 11:00:04 501  Thursday
+    3  2017-06-08 10:00:04 472  Thursday
+    4  2017-06-08 09:00:04 444  Thursday
+    5  2017-06-08 08:00:04 446  Thursday
+    6  2017-06-08 07:00:04 444  Thursday
+    7  2017-06-08 06:00:04 441  Thursday
+    8  2017-06-08 05:00:04 439  Thursday
+    9  2017-06-08 04:00:04 442  Thursday
+    10 2017-06-08 03:00:04 440  Thursday
+    11 2017-06-08 02:00:04 443  Thursday
+    12 2017-06-08 01:00:04 445  Thursday
+    13 2017-06-08 00:00:04 445  Thursday
+    14 2017-06-07 23:00:04 446 Wednesday
+    15 2017-06-07 22:00:04 445 Wednesday
+    16 2017-06-07 21:00:04 447 Wednesday
+    17 2017-06-07 20:00:04 445 Wednesday
+    18 2017-06-07 19:00:04 451 Wednesday
+    19 2017-06-07 18:00:04 469 Wednesday
+    20 2017-06-07 17:00:04 473 Wednesday
+    21 2017-06-07 16:00:03 510 Wednesday
+    22 2017-06-07 15:00:03 517 Wednesday
+    23 2017-06-07 14:00:03 524 Wednesday
+    24 2017-06-07 13:00:03 489 Wednesday
+
+So 1. How to prepare data to be able for combining the data frames?
+2. How to 
