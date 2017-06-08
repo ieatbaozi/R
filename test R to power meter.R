@@ -73,8 +73,8 @@ p <- ggplot(data = meter7_1used, aes(x=meter7_1used$AddDate,y=meter7_1used$diffk
 rects <- data.frame(xstart = as.POSIXct('2017-06-04 00:00:00'), xend = as.POSIXct('2017-06-5 00:00:00'))
 #geom_rect(data = meter7_1used, aes(xmin = rects$xstart, xmax = rects$xend, ymin = -Inf, ymax = Inf), alpha = 0.4)
 }
-p + scale_x_datetime(labels = date_format("%m-%d"), breaks = date_breaks("days")) + theme(axis.text.x = element_text(angle = 45)) + geom_rect(data = meter7_1used, aes(xmin = rects$xstart, xmax = rects$xend, ymin = -Inf, ymax = Inf), alpha = 0.4) + geom_line()
+ggplot(meter7_1used, aes(x=meter7_1used$AddDate,y=meter7_1used$diffkWh, color=ifelse(((meter7_1used$diffkWh>520)),"bad", "good"))) + scale_color_manual(guide=FALSE, values=c("red", "black")) + geom_point() + scale_x_datetime(labels = date_format("%m-%d"), breaks = date_breaks("days")) + theme(axis.text.x = element_text(angle = 45)) + geom_rect(data = meter7_1used, aes(xmin = rects$xstart, xmax = rects$xend, ymin = -Inf, ymax = Inf), alpha = 0.4) + geom_line()
 
 
 
-ggplot(meter7_1used, aes(x=meter7_1used$AddDate,y=meter7_1used$diffkWh, color=ifelse(((meter7_1used$diffkWh>520)),"bad", "good"))) + scale_color_manual(guide=FALSE, values=c("red", "black")) + geom_point()
+ggplot(meter7_1used, aes(x=meter7_1used$AddDate,y=meter7_1used$diffkWh, color=ifelse(((meter7_1used$diffkWh>520)),"bad", "good"))) + scale_color_manual(guide=FALSE, values=c("red", "black")) + geom_point() + scale_x_datetime(labels = date_format("%m-%d"), breaks = date_breaks("days")) + theme(axis.text.x = element_text(angle = 45))
