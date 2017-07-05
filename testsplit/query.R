@@ -7,6 +7,7 @@ library(scales)
 library(DT)
 library(shiny)
 
+
 start.date <- "2017-03-01"
 
 conn <- odbcDriverConnect('Driver={SQL Server};Server=10.17.127.17;Database=MIT;Uid=sqlreader;Pwd=sqlReader')
@@ -185,6 +186,10 @@ meter_all$Building5 <- meter_all[,'MDB5-1']
 meter_all$Building6 <- rowSums(meter_all[,c('MDB6-1','MDB6-2')], na.rm = TRUE, dims = 1)
 meter_all$Building7 <- rowSums(meter_all[,c('MDB7-1','MDB7-2')], na.rm = TRUE, dims = 1)
 meter_all$TotalPower <- rowSums(meter_all[,building_meter], na.rm = TRUE, dims = 1)
+meter_all <- head(meter_all,-1)
+
 tz(meter_all$DateTime) <- "Asia/Bangkok"
 weeks <- data.frame(w = seq(min(meter_all$DateTime[weekdays(meter_all$DateTime)=='Monday']), max(meter_all$DateTime[weekdays(meter_all$DateTime)=='Monday']), 'week'))
 
+meter_show <- meter_all
+tz(meter_show$DateTime) <- "UTC"

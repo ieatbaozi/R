@@ -21,7 +21,7 @@ shinyUI(fluidPage(
     actionButton("do", "Submit"),
     navbarPage(
       title = 'Options',
-      tabPanel('Display Table',  DT::dataTableOutput('ex1')),
+     
       tabPanel('Display Plot',   plotlyOutput("plot"),
                selectInput("dataset", "Choose a dataset:", 
                            choices = c("TotalPower","MDB1-1", "MDB2-1", "MDB2-2","MDB2-3",
@@ -31,7 +31,8 @@ shinyUI(fluidPage(
                                        "Building4","Building5","Building6","Building7"))
                , verbatimTextOutput("summary")),
       tabPanel('Export',  downloadButton('downloadData', 'Download Data'),downloadButton('downloadPlot', 'Download Plot')),
-      tabPanel('All of Table',  DT::dataTableOutput('ex2')))
+      tabPanel('Display Table', dataTableOutput('ex1')),
+      tabPanel('All of Table',  dataTableOutput('ex2')))
     
   )
 ))
