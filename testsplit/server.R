@@ -41,7 +41,9 @@ shinyServer(function(input, output) {
                          breaks = date_breaks("days"),
                          minor_breaks = date_breaks("2 hour"),
                          expand = c(0,0),limits = c(as.POSIXct(x,tz="Asia/Bangkok"),as.POSIXct(y,tz="Asia/Bangkok"))) +
+        scale_y_continuous(expand = c(0, 0), limits = c(0, max(meter.all[,input$dataset])+1000)) +
         theme(text = element_text(size=10),
+              axis.text.x = element_text(angle = 45, hjust = 1),
               legend.text = element_text(size=10),
               panel.background = element_rect(fill = "white", colour = "black"),
               panel.grid.major.x = element_line(color = 'grey75', size = 0.2),
