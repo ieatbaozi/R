@@ -5,6 +5,7 @@ library(ggplot2)
 library(plotly)
 library(scales)
 library(DT)
+library(shinyTime)
 library(shiny)
 
 
@@ -12,6 +13,11 @@ start.date <- "2017-03-01"
 
 conn <- odbcDriverConnect('Driver={SQL Server};Server=10.17.127.17;Database=MIT;Uid=sqlreader;Pwd=sqlReader')
 conn
+allmetername <- paste0("select PMMID,MeterName from MIT..PowerMeterMaster (NOLOCK)")
+all.metername <- sqlQuery(conn,allmetername)
+all.metername$PMMID <- as.character(all.metername$PMMID)
+all.metername$MeterName <- as.character(all.metername$MeterName)
+
 query.all <- paste0("select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,((kWh_import_H+kWh_import_L)/1000) as 'kWh',MIT..PowerMeterData.AddDate
                     from MIT..PowerMeterData (NOLOCK) 
                     join MIT..PowerMeterMaster (NOLOCK) on MIT..PowerMeterData.PMMID = MIT..PowerMeterMaster.PMMID 

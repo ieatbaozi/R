@@ -15,10 +15,11 @@ shinyUI(fluidPage(
   
   mainPanel(
     
-    dateRangeInput("daterange", "Date range:",
+    dateRangeInput("daterange", "Date range for diff-kWh:",
                    start = Sys.Date()-7,
                    end = Sys.Date(),min=start.date,max=Sys.Date()+1),
     actionButton("do", "Submit"),
+    
     navbarPage(
       title = 'Options',
      
@@ -32,7 +33,18 @@ shinyUI(fluidPage(
                , verbatimTextOutput("summary")),
       tabPanel('Export',  downloadButton('downloadData', 'Download Data'),downloadButton('downloadPlot', 'Download Plot')),
       tabPanel('Display Table', dataTableOutput('ex1')),
-      tabPanel('All of Table',  dataTableOutput('ex2')))
+      tabPanel('All of Table',  dataTableOutput('ex2')),
+      tabPanel('Input Curr-Volt',column(7, wellPanel(
+        selectInput("pickmeter","Meter Name:",choices = all.metername$MeterName),
+        dateInput('date', 'Date input:', value = Sys.Date(),min = Sys.Date()-90 , max = Sys.Date()),
+        timeInput("time_input1", "from", value = strptime("00:00:00", "%T")),
+        timeInput("time_input2", "to", value = strptime("23:59:59", "%T"))
+        ,textOutput("time")
+      )),
+      actionButton("dospec", "Get Curr-Volt")),
+      tabPanel('Curr-Volt',plotlyOutput("plotspec"), verbatimTextOutput("summaryspec"),downloadButton('downloadDataspec', 'Download Data'),downloadButton('downloadPlotspec', 'Download Plot')),
+      tabPanel('Split Curr-Volt',plotlyOutput("plotspecCurr"),plotlyOutput("plotspecVolt"))
+      )
     
   )
 ))
