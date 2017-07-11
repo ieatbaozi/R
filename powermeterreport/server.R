@@ -33,7 +33,7 @@ shinyServer(function(input, output) {
     plotInput <- reactive({
     
       ggplot(meter.all,main = input$dataset) + ggtitle(input$dataset) + ylab(input$dataset) +
-        geom_line(aes(x = DateTime ,y=meter.all[,input$dataset]),lwd=0.8) +
+        geom_line(aes(x = DateTime ,y=meter.all[,input$dataset] ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.8) +
         geom_vline(data = weeks, 
                    aes(xintercept = as.numeric(w)),
                    color = 'grey55', size = 1) +
@@ -55,7 +55,7 @@ shinyServer(function(input, output) {
     
     
     output$plot <- renderPlotly(
-      print(ggplotly(plotInput())) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE))
+      print(ggplotly(plotInput(), tooltip = c("y","text")) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
     )
     output$summary <- renderPrint({
       
@@ -94,12 +94,12 @@ shinyServer(function(input, output) {
     plotInputspec <- reactive({
       
       ggplot(data.voltcurr, aes(DateTime)) + ylab(m) + ggtitle(m)+
-        geom_line(aes(y = CurrL1, col = "CurrL1"),lwd=0.7) + 
-        geom_line(aes(y = CurrL2, col = "CurrL2"),lwd=0.7) +
-        geom_line(aes(y = CurrL3, col = "CurrL3"),lwd=0.7) +
-        geom_line(aes(y = VoltL1_2, col = "VoltL1_2"),lwd=0.5) + 
-        geom_line(aes(y = VoltL2_3, col = "VoltL2_3"),lwd=0.5) +
-        geom_line(aes(y = VoltL3_1, col = "VoltL3_1"),lwd=0.5) +
+        geom_line(aes(y = CurrL1, col = "CurrL1" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.7) + 
+        geom_line(aes(y = CurrL2, col = "CurrL2" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.7) +
+        geom_line(aes(y = CurrL3, col = "CurrL3" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.7) +
+        geom_line(aes(y = VoltL1_2, col = "VoltL1_2" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.5) + 
+        geom_line(aes(y = VoltL2_3, col = "VoltL2_3" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.5) +
+        geom_line(aes(y = VoltL3_1, col = "VoltL3_1" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.5) +
         scale_x_datetime(labels = date_format("%m-%d %H:%M",tz="Asia/Bangkok"),breaks = date_breaks("2 hour"),expand = c(0,0),limits = c(as.POSIXct(a,tz="Asia/Bangkok"),as.POSIXct(b,tz="Asia/Bangkok"))) +
         scale_y_continuous(expand = c(0,10))  +
        # expand_limits( y = 0) +
@@ -112,9 +112,9 @@ shinyServer(function(input, output) {
     plotInputspecCurr <- reactive({
       
       ggplot(data.voltcurr, aes(DateTime)) + ylab("Current") + ggtitle(m)+
-        geom_line(aes(y = CurrL1, col = "CurrL1"),lwd=0.7) + 
-        geom_line(aes(y = CurrL2, col = "CurrL2"),lwd=0.7) +
-        geom_line(aes(y = CurrL3, col = "CurrL3"),lwd=0.7) +
+        geom_line(aes(y = CurrL1, col = "CurrL1" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.7) + 
+        geom_line(aes(y = CurrL2, col = "CurrL2" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.7) +
+        geom_line(aes(y = CurrL3, col = "CurrL3" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.7) +
         scale_x_datetime(labels = date_format("%m-%d %H:%M",tz="Asia/Bangkok"),breaks = date_breaks("2 hour"),expand = c(0,0),limits = c(as.POSIXct(a,tz="Asia/Bangkok"),as.POSIXct(b,tz="Asia/Bangkok"))) +
         scale_y_continuous(expand = c(0,10))  +
         # expand_limits( y = 0) +
@@ -127,9 +127,9 @@ shinyServer(function(input, output) {
     plotInputspecVolt <- reactive({
       
       ggplot(data.voltcurr, aes(DateTime)) + ylab("Voltage") + ggtitle(m)+
-        geom_line(aes(y = VoltL1_2, col = "VoltL1_2"),lwd=0.5) + 
-        geom_line(aes(y = VoltL2_3, col = "VoltL2_3"),lwd=0.5) +
-        geom_line(aes(y = VoltL3_1, col = "VoltL3_1"),lwd=0.5) +
+        geom_line(aes(y = VoltL1_2, col = "VoltL1_2" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.5) + 
+        geom_line(aes(y = VoltL2_3, col = "VoltL2_3" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.5) +
+        geom_line(aes(y = VoltL3_1, col = "VoltL3_1" ,text = paste("DateTime:", format(DateTime, "%b-%d %A  %T")), group = 1),lwd=0.5) +
         scale_x_datetime(labels = date_format("%m-%d %H:%M",tz="Asia/Bangkok"),breaks = date_breaks("2 hour"),expand = c(0,0),limits = c(as.POSIXct(a,tz="Asia/Bangkok"),as.POSIXct(b,tz="Asia/Bangkok"))) +
         scale_y_continuous(expand = c(0,10))  +
         # expand_limits( y = 0) +
@@ -141,15 +141,15 @@ shinyServer(function(input, output) {
     })
     
     output$plotspec <- renderPlotly(
-     print(ggplotly(plotInputspec()) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
+     print(ggplotly(plotInputspec(), tooltip = c("y","text")) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
        )
     
     output$plotspecCurr <- renderPlotly(
-      print(ggplotly(plotInputspecCurr()) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
+      print(ggplotly(plotInputspecCurr(), tooltip = c("y","text")) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
     )
     
     output$plotspecVolt <- renderPlotly(
-      print(ggplotly(plotInputspecVolt()) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
+      print(ggplotly(plotInputspecVolt(), tooltip = c("y","text")) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
     )
     
     output$summaryspec <- renderPrint({
