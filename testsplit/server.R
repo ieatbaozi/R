@@ -57,6 +57,7 @@ shinyServer(function(input, output) {
     
     output$plot <- renderPlotly(
       print(ggplotly(plotInput(), tooltip = c("y","text"))) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE))
+      
     )
     output$summary <- renderPrint({
       
@@ -75,21 +76,56 @@ shinyServer(function(input, output) {
     a <-  as.character(paste0(input$date," ",strftime(input$time_input1, "%T")))
     b <-  as.character(paste0(input$date," ",strftime(input$time_input2, "%T")))
     m <- input$pickmeter
+    l <- input$date
+    o <- paste0(as.Date(input$date)+days(1)," 01:59:59")
     
     conn <- odbcDriverConnect('Driver={SQL Server};Server=10.17.127.17;Database=MIT;Uid=sqlreader;Pwd=sqlReader')
     conn
     
-    query.voltcurr <- paste0("select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,Voltage_L1_L2,Voltage_L2_L3,Voltage_L3_L1,Current_L1,Current_L2,Current_L3,MIT..PowerMeterData.AddDate
+    query.voltcurr <- paste0("select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,Voltage_L1_L2,Voltage_L2_L3,Voltage_L3_L1,Current_L1,Current_L2,Current_L3,MIT..PowerMeterData.AddDate,((kWh_import_H+kWh_import_L)/1000) as 'kWh'
                              from MIT..PowerMeterData (NOLOCK) 
                              join MIT..PowerMeterMaster (NOLOCK) on MIT..PowerMeterData.PMMID = MIT..PowerMeterMaster.PMMID 
-                             where MIT..PowerMeterMaster.MeterName like '",m,"' and MIT..PowerMeterData.AddDate between ('",a,"') and ('",b,"') 
+                             where MIT..PowerMeterMaster.MeterName like '",m,"' and MIT..PowerMeterData.AddDate between ('",l,"') and ('",o,"') 
                              order by AddDate DESC ")
     data_voltcurr <- sqlQuery(conn, query.voltcurr)
     odbcClose(conn)
+    temp_data_voltcurr <- data_voltcurr
+    data_voltcurr <- data_voltcurr[,-10]
+    ################
+    data.daily <- temp_data_voltcurr[,9:10]
+    colnames(data.daily) <- c("DateTime","kWh")
+    data.sub <- function(x){
+      x %>% 
+        mutate(DateTime = ymd_hms(DateTime), dt = as_date(DateTime), hr = hour(DateTime)) %>% 
+        group_by(dt, hr) %>% 
+        filter(DateTime == min(DateTime)) %>% 
+        ungroup() %>% 
+        select(DateTime, kWh)
+    }
     
+    data.daily <- as.data.frame(data.sub(data.daily))
+    
+    second(data.daily$DateTime) <- 0
+    minute(data.daily$DateTime) <- 0
+    
+    temp1 <- c(0 ,abs(diff(data.daily$kWh)))
+    data.daily$diffkWh <- temp1
+    data.daily <- data.daily[,-2]
+    colnames(data.daily)<- c("DateTime",m)
+    data.daily <- data.daily[-1,]
+    
+    data.daily[m] <-
+      lapply(data.daily[m], function(x){
+        g <- cumsum(!is.na(x))
+        ave(x, g, FUN = function(y) y[1] / length(y))
+      })
+    
+    ################
     data.voltcurr <- data_voltcurr[,c(9,3:8)]
     colnames(data.voltcurr) <- c("DateTime","VoltL1_2","VoltL2_3","VoltL3_1","CurrL1","CurrL2","CurrL3")
+    data.voltcurr <- data.voltcurr[(data.voltcurr$DateTime>=a & data.voltcurr$DateTime<=b),]
     second(data.voltcurr$DateTime) <- 0
+   
     #_______________
     
     plotInputspec <- reactive({
@@ -141,6 +177,11 @@ shinyServer(function(input, output) {
               panel.grid.major.x = element_line(color = 'grey75', size = 0.2))
     })
     
+    
+    
+    
+    
+    
     output$plotspec <- renderPlotly(
      print(ggplotly(plotInputspec(), tooltip = c("y","text")) %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE)))
        )
@@ -158,20 +199,26 @@ shinyServer(function(input, output) {
     })
     
     output$downloadDataspec <- downloadHandler(
-      filename = function() { paste0("meter",m,".csv") },
+      filename = function() { paste0("V-C ",m," ",n,".csv") },
       content = function(file) {
         write.csv(data.voltcurr, file,row.names = FALSE)
       }
     )
     
     output$downloadPlotspec <- downloadHandler(
-      filename = function() { paste0("meter",m,".png") },
+      filename = function() { paste0("V-C ",m," ",n,".png") },
       content = function(file) {
         device <- function(..., width, height) grDevices::png(..., width = 1280 , height = 680, res = 100 , units = "px")
         ggsave(file, plot = plotInputspec(), device = device)
       }
     )
     
+    output$downloadDataDaily <- downloadHandler(
+      filename = function() { paste0("submeter diffkWh ",input$date,".csv") },
+      content = function(file) {
+        write.csv(data.daily, file,row.names = FALSE)
+      }
+    )
     
   })
 
