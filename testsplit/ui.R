@@ -19,7 +19,7 @@ shinyUI(fluidPage(
     
     navbarPage(
       title = 'Options',
-      tabPanel("Input : diff-kWh" , dateRangeInput("daterange", "Date range for diff-kWh:",
+      tabPanel("Input diff-kWh" , dateRangeInput("daterange", "Date range for diff-kWh:",
                    start = Sys.Date()-7,
                    end = Sys.Date(),min=start.date,max=Sys.Date()+1),
       actionButton("do", "Submit")),
