@@ -1,4 +1,3 @@
-
 library(shiny)
 
 source('/srv/shiny-server/powermeterreport/query.R')
@@ -19,12 +18,12 @@ shinyUI(fluidPage(
     navbarPage(
       title = 'Options',
       
-     tabPanel("Input diff-kWh" , dateRangeInput("daterange", "Date range for diff-kWh:",
+     tabPanel("Input Diff-kWh" , dateRangeInput("daterange", "Date range for diff-kWh:",
                    start = Sys.Date()-7,
                    end = Sys.Date(),min=start.date,max=Sys.Date()+1),
       actionButton("do", "Submit")),
       
-      tabPanel('Display Plot',   plotlyOutput("plot"),
+      tabPanel('Diff-kWh Plot',   plotlyOutput("plot"),
                selectInput("dataset", "Choose a dataset:", 
                            choices = c("TotalPower","MDB1-1", "MDB2-1", "MDB2-2","MDB2-3",
                                        "MDB3-1","MDB3-2","MDB4-1","MDB4-2",
