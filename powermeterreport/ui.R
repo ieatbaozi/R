@@ -35,7 +35,7 @@ shinyUI(fluidPage(
       tabPanel('Export',  downloadButton('downloadData', 'Download Data'),downloadButton('downloadPlot', 'Download Plot')),
       tabPanel('Display Table', dataTableOutput('ex1')),
       tabPanel('All of Table',  dataTableOutput('ex2')),
-      tabPanel('Input Curr-Volt/Daily diff kWh',column(7, wellPanel(
+      tabPanel('Daily Input Submeter',column(7, wellPanel(
         selectInput("pickmeter","Meter Name:",choices = all.metername$MeterName),
         dateInput('date', 'Date input:', value = Sys.Date(),min = Sys.Date()-90 , max = Sys.Date()),
         timeInput("time_input1", "from", value = strptime("00:00:00", "%T")),
