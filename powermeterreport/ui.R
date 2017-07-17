@@ -14,15 +14,16 @@ shinyUI(fluidPage(
  # ),
   
   mainPanel(
-    
-    dateRangeInput("daterange", "Date range for diff-kWh:",
-                   start = Sys.Date()-7,
-                   end = Sys.Date(),min=start.date,max=Sys.Date()+1),
-    actionButton("do", "Submit"),
+ 
     
     navbarPage(
       title = 'Options',
-     
+      
+     tabPanel("Input diff-kWh" , dateRangeInput("daterange", "Date range for diff-kWh:",
+                   start = Sys.Date()-7,
+                   end = Sys.Date(),min=start.date,max=Sys.Date()+1),
+      actionButton("do", "Submit")),
+      
       tabPanel('Display Plot',   plotlyOutput("plot"),
                selectInput("dataset", "Choose a dataset:", 
                            choices = c("TotalPower","MDB1-1", "MDB2-1", "MDB2-2","MDB2-3",
