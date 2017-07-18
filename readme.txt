@@ -59,6 +59,7 @@ _____________________
 
 sudo nano /etc/shiny-server/shiny-server.conf
 #Y to edit and get 'preserve_logs true;' to the 1st line
+sudo systemctl start shiny-server
 
 _____________________
 7. Move the file to /srv/shiny-server/ to run the web app
@@ -69,6 +70,7 @@ svn checkout https://github.com/ieatbaozi/R-practicing/trunk/powermeterreport/ #
 cd /
 sudo mv /home/username/powermeterreport/ /srv/shiny-server/ #From you path *username* to server directory
 cd -
+sudo systemctl restart shiny-server
 
 _____________________
 8. Set Crontab hourly restarting the server
