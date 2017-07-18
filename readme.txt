@@ -57,7 +57,7 @@ _____________________
 _____________________
 6. Get 'preserve_logs true;' to the 1st line in /etc/shiny-server/shiny-server.conf
 
-sudo /etc/shiny-server/shiny-server.conf
+sudo nano /etc/shiny-server/shiny-server.conf
 #Y to edit and get 'preserve_logs true;' to the 1st line
 
 _____________________
