@@ -1,5 +1,5 @@
 How to launch R shiny web app on server :
-0. 
+
 _____________________
 1. Install SQL server
 
@@ -84,3 +84,4 @@ sudo chmod a+x /etc/cron.hourly/zz-reboot
 _____________________
 9. Test the server by 'server address:3838' then test the domain 'server address:3838/powermeterreport/'
 Note : Always check log files in /var/log/shiny-server/ it takes around 1b to most 2kb each file up to characters in log. It is able to delete log files to clear unnecessary allocation.
+#sudo truncate -s 0 /var/log/shiny-server/*log #For setting bytes to zeros but still keep files' name.
