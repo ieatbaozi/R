@@ -43,7 +43,8 @@ _____________________
 4. Install all packages used in the shiny web app
 
 sudo chmod 777 /usr/local/lib/R/site-library
-sudo apt-get install libcurl4-gnutls-dev
+sudo apy-get update
+sudo apt-get -y install libcurl4-gnutls-dev
 sudo apt-get install libssl-dev
 sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr','ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
 
