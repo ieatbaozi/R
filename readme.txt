@@ -64,7 +64,7 @@ sudo systemctl start shiny-server
 _____________________
 7. Move the file to /srv/shiny-server/ to run the web app
 
-sudo apt-get subversion
+sudo apt-get install subversion
 svn checkout https://github.com/ieatbaozi/R-practicing/trunk/powermeterreport/ #Download from git to user home
 
 cd /
