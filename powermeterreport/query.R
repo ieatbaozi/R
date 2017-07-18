@@ -9,7 +9,7 @@ library(shinyTime)
 library(shiny)
 
 
-start.date <- "2017-03-01"
+start.date <- "2017-04-01"
 
 conn <- odbcDriverConnect('Driver={ODBC Driver 13 for SQL Server};Server=10.17.127.17;Database=MIT;Uid=sqlreader;Pwd=sqlReader')
 conn
