@@ -35,16 +35,15 @@ sudo gdebi shiny-server-1.5.3.838-amd64.deb
 #It must get the result as
 #[1] "/usr/local/lib/R/site-library" "/usr/lib/R/site-library"
 #[3] "/usr/lib/R/library"
-#Unless
-#sudo nano /usr/lib/R/etc/Renviron
+
+sudo nano /usr/lib/R/etc/Renviron
 #set commenting to the line as '#R_LIBS_USER=${R_LIBS_USER-‘~/R/x86_64-pc-linux-gnu-library/3.2’}' 
 
 _____________________
 4. Install all packages used in the shiny web app
 
 sudo chmod 777 /usr/local/lib/R/site-library
-sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr',
-'ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr','ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
 
 _____________________
 5. Change the unix time-zone
