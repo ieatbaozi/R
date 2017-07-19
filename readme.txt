@@ -3,7 +3,7 @@ How to launch R shiny web app on server :
 _____________________
 1. Install SQL server
 
-#sudo apt-get install curl
+#sudo apt-get install -y curl
 #sudo apt-get update
 #sudo apt-get upgrade
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
@@ -17,7 +17,7 @@ _____________________
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
 sudo apt-get update
-sudo apt-get install mssql-tools unixodbc-dev
+sudo apt-get install -y mssql-tools unixodbc-dev
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 source ~/.bashrc
@@ -25,9 +25,9 @@ source ~/.bashrc
 _____________________
 3. Install R and R-server
 
-sudo apt-get install r-base
+sudo apt-get install -y r-base
 sudo su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
-sudo apt-get install gdebi-core
+sudo apt-get install -y gdebi-core
 wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.5.3.838-amd64.deb
 sudo gdebi shiny-server-1.5.3.838-amd64.deb
 
@@ -45,7 +45,7 @@ _____________________
 sudo chmod 777 /usr/local/lib/R/site-library
 sudo apy-get update
 sudo apt-get -y install libcurl4-gnutls-dev
-sudo apt-get install libssl-dev
+sudo apt-get install -y libssl-dev
 sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr','ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
 
 _____________________
@@ -64,7 +64,7 @@ sudo systemctl start shiny-server
 _____________________
 7. Move the file to /srv/shiny-server/ to run the web app
 
-sudo apt-get install subversion
+sudo apt-get install -y subversion
 svn checkout https://github.com/ieatbaozi/R-practicing/trunk/powermeterreport/ #Download from git to user home
 
 cd /
@@ -75,7 +75,7 @@ sudo systemctl restart shiny-server
 _____________________
 8. Set Crontab hourly restarting the server
 
-sudo apt-get install cron
+sudo apt-get install -y cron
 sudo visudo
  username ALL=(ALL) NOPASSWD: /etc/cron.hourly/zz-reboot
 
