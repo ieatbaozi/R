@@ -72,10 +72,13 @@ _____________________
 7. Move the file to /srv/shiny-server/ to run the web app
 
 sudo apt-get install -y subversion
-svn checkout https://github.com/ieatbaozi/R-practicing/trunk/powermeterreport/ #Download from git to user home
+svn checkout https://github.com/ieatbaozi/R-practicing/trunk/powermeterreport/ 
+#Download from git to user home
 
 cd /
-sudo mv /home/username/powermeterreport/ /srv/shiny-server/ #From you path *username* to server directory
+sudo mv /home/username/powermeterreport/ /srv/shiny-server/ 
+#From you path *username* to server directory
+
 cd -
 sudo systemctl restart shiny-server
 
@@ -95,4 +98,5 @@ sudo chmod a+x /etc/cron.hourly/zz-reboot
 _____________________
 9. Test the server by 'server address:3838' then test the domain 'server address:3838/powermeterreport/'
 Note : Always check log files in /var/log/shiny-server/ it takes around 1b to most 2kb each file up to characters in log. It is able to delete log files to clear unnecessary allocation.
-#sudo truncate -s 0 /var/log/shiny-server/*log #For setting bytes to zero but still keep files' name.
+#sudo truncate -s 0 /var/log/shiny-server/*log 
+#For setting bytes to zero but still keep files' name.
