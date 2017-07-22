@@ -49,6 +49,7 @@ sudo apt-get install -y r-cran-rjava
 sudo add-apt-repository -y ppa:openjdk-r/ppa  
 sudo apt-get update   
 sudo apt-get install -y openjdk-7-jdk  
+sudo apt-get install -y libgeos-dev
 
 sudo apt-get install -y libcurl4-gnutls-dev
 sudo apt-get install -y libssl-dev
