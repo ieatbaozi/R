@@ -44,6 +44,8 @@ _____________________
 
 
 sudo chmod 777 /usr/local/lib/R/site-library
+
+sudo apt-get install -y r-cran-rjava
 sudo add-apt-repository -y ppa:openjdk-r/ppa  
 sudo apt-get update   
 sudo apt-get install -y openjdk-7-jdk  
