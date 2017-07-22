@@ -76,8 +76,8 @@ svn checkout https://github.com/ieatbaozi/R-practicing/trunk/powermeterreport/
 #Download from git to user home
 
 cd /
-sudo mv /home/username/powermeterreport/ /srv/shiny-server/ 
-#From you path *username* to server directory
+sudo mv /home/administrator/powermeterreport/ /srv/shiny-server/ 
+#From you path /home/*username*/ (in the case is 'admistrator') to server directory
 
 cd -
 sudo systemctl restart shiny-server
