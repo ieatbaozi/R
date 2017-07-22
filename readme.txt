@@ -44,11 +44,11 @@ _____________________
 
 
 sudo chmod 777 /usr/local/lib/R/site-library
-sudo add-apt-repository ppa:openjdk-r/ppa  
+sudo add-apt-repository -y ppa:openjdk-r/ppa  
 sudo apt-get update   
-sudo apt-get install openjdk-7-jdk  
+sudo apt-get install -y openjdk-7-jdk  
 
-sudo apt-get -y install libcurl4-gnutls-dev
+sudo apt-get install -y libcurl4-gnutls-dev
 sudo apt-get install -y libssl-dev
 sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr','ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
 
