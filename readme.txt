@@ -50,9 +50,9 @@ sudo add-apt-repository -y ppa:openjdk-r/ppa
 sudo apt-get update   
 sudo apt-get install -y openjdk-7-jdk  
 sudo apt-get install -y libgeos-dev
-
 sudo apt-get install -y libcurl4-gnutls-dev
 sudo apt-get install -y libssl-dev
+sudo R CMD javareconf
 sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr','ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
 
 _____________________
