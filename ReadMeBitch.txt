@@ -8,5 +8,10 @@ Objective of internship :
 - Applicability from lecture to career
 - Enhances of the academic experience
 - Career direction
+- Problem solving skills
+- Communication skills
 
 Timeline : 1 Jun - 27 Jul
+
+Process :
+Requirement : An web application displays plots about power meter's diff-kWh with analysis. 
