@@ -6,12 +6,23 @@ library(productplots) #geom_mosaic
 library(data.table) # trabspose
 library(formattable) # formattable
 #########
-testcluster <- meter_all[,15:21]
+source('~/R/work/testsplit/query.R')
+x <- '2017-06-01'
+y <- '2017-07-01'
+meter.all <- meter_all[(meter_all$DateTime>=x & meter_all$DateTime<=y),]
+testcluster <- meter.all[,c(1,15:21)]
 species_testcol <- rainbow_hcl(7)
-pairs(testcluster,lower.panel = NULL,cex.labels = 2,pch=19,cex=1.2)
+pairs(testcluster, lower.panel = panel.smooth ,upper.panel = NULL ,cex.labels = 2,pch=19,cex=1.2)
+todo <- testcluster[-1]
+topie <- colSums(todo)
+topie <- as.data.frame(building_meter,topie)
+colnames(topie) <- 'Sum'
 
 
-transposetest <- transpose(testcluster)
+
+
+
+transposetest <- transpose(todo)
 colnames(transposetest) <- rownames(testcluster)
 rownames(transposetest) <- colnames(testcluster)
 
@@ -41,4 +52,63 @@ rownames(transposetest) <- colnames(testcluster)
    xlab("Mean Usage") + ylab("Building") 
  
  ggplotly(q, tooltip = "text") %>% config(displayModeBar = FALSE) %>% layout(xaxis=list(fixedrange=TRUE)) %>% layout(yaxis=list(fixedrange=TRUE))
+ 
+ 
+ #######################################################
+ 
+
+ 
+ summary(meter.all)
+ 
+ vars.to.use <- colnames(testcluster)[-1]
+ vars.to.use
+ pmatrix <- scale(testcluster[,vars.to.use])
+ pmatrix
+ # keep some attr for later use
+ #pcenter <- attr(pmatrix, "scaled:center")
+ #pcenter
+ #pscale <- attr(pmatrix, "scaled:scale")
+ #pscale
+ d <- dist(pmatrix, method = "euclidean")
+ d
+ print(d,digits=2)
+ # note: name method name change
+ pfit <- hclust(d, method = "ward.D2")
+ pfit
+ plot(pfit, labels = testcluster$DateTime)
+ rect.hclust(pfit, k=5)
+
+ groups <- cutree(pfit, k=5)
+ groups
+ groups2 <- cutree(pfit, k=4)
+ groups2
+ print_clusters <- function(labels,k) {
+   for(i in 1:k) {
+     print(paste("cluster",i))
+     print(protein[labels==i,c("Country","RedMeat","Fish","Fr.Veg")])
+   }
+ } 
+ print_clusters(groups, 5)
+ library(ggplot2)
+ princ <- prcomp(pmatrix)
+ nComp <- 2
+ project <- predict(princ, newdata=pmatrix)[,1:nComp]
+ project
+ project.plus <- cbind(as.data.frame(project),
+                       cluster=as.factor(groups),
+                       country=protein$Country)
+ project.plus
+ ggplot(project.plus, aes(x=PC1,y=PC2)) +
+   geom_point(aes(shape=cluster)) +
+   geom_text(aes(label=country),
+             hjust=0, vjust=1)
+ library(fpc)
+ kbest.p <- 5
+ cboot.hclust <- clusterboot(pmatrix,clustermethod = hclustCBI,
+                             method = "ward.D2", k=kbest.p)
+ summary(cboot.hclust$result)
+ groups <- cboot.hclust$result$partition
+ print_clusters(groups, kbest.p)
+ cboot.hclust$bootmean
+ cboot.hclust$bootbrd
  
