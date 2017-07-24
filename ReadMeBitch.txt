@@ -62,3 +62,18 @@ Developing :
 - Wrong timezone making time shifted 7 hours. -> Check packages or functions' timezone default which one should set "Asia/Bangkok" or "UTC" to.
 - Shell script is very complicated and error. -> Do normal bash (Make it simple.)
 - Linux has many packages related. -> Check and install carefully till completely.
+
+
+====================================================================================================
+
+Benefits
+"Lots of learning"
+- Work as a team.
+- Friendship.
+- The importance of going by the book.
+"To"
+- Be on time.
+- Be concentrated.
+- Realise about safety.
+- Better solution skills.
+- Apply concept in practical to real life including career path.
