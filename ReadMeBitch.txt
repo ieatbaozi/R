@@ -13,6 +13,8 @@ Objective of internship :
 
 Timeline : 1 Jun - 27 Jul
 
+====================================================================================================
+
 Process ->
 
 
@@ -38,6 +40,8 @@ Implementation :
 
 Verification : User testing for feedback and get new a little requirements to add submeter's daily diff-kWh data.
 
+====================================================================================================
+
 Tools : Use - sql query on MSSQL server
 - Open source R on Rstudio
 - VB on Visual Studio
@@ -45,4 +49,16 @@ Tools : Use - sql query on MSSQL server
 - Git on github.com for commiting files
 Romote the server on VNC viewer. Moreover, Learn many solutions on stackoverflow.com and github.com / 
 
+====================================================================================================
 
+Problems & Solutions
+General : 
+- Found meter being out of order or broken from missing or unproper values. -> Tell supervisor or PE department.
+- Something takes too long time for tutorial and hard to understand. -> Ask supervisor suggestions.
+Developing : 
+- Cant fix the error. -> Find another way more safe coding and ask stackoverflow. 
+- Lots of missing values and accumulated after got diff-val. -> Filter data again and bin proper values.
+- Different format between Windows and Linux platform. -> Create function displaying texts returning values.
+- Wrong timezone making time shifted 7 hours. -> Check packages or functions' timezone default which one should set "Asia/Bangkok" or "UTC" to.
+- Shell script is very complicated and error. -> Do normal bash (Make it simple.)
+- Linux has many packages related. -> Check and install carefully till completely.
