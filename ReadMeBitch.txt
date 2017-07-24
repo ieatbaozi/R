@@ -17,19 +17,23 @@ Process ->
 
 
 Requirements : An web application displays plots about main power meter's diff-kWh with analysis. 
+
 Design : 
+
 Implementation :
-Do data preprocessing.
+- Do data preprocessing.
 (Just done data preparetion but during work in process was having a meeting and getting new requirements.)
 
 New Requirements : An web apllication displays plot about main power meter's diff-kWh and submeter's voltage-current minutely thorough report.
 Design :
+
 Implementation : 
-Split analysis visualization out for only education. 
-Go on developing web application by using Shiny web application package. 
-Add exporting data table after data filtered by *.csv and plot by *.png.
-Do reactive data plot.
-Simulate web server by linux using Terminal bash in virtual machine before install the real web server. 
+- Split analysis visualization out for only education. 
+- Go on developing web application by using Shiny web application package. 
+- Add exporting data table after data filtered by *.csv and plot by *.png.
+- Do reactive data plot.
+- Simulate web server by linux using Terminal bash configuring all things and deploying web to server before install the real web server. 
+
 Verification : User testing for feedback and get new a little requirements to add submeter's daily diff-kWh data.
 
 Tools : Use - sql on MSSQL server
