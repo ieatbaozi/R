@@ -68,12 +68,12 @@ Developing :
 
 Benefits
 "Lots of learning"
-- Work as a team.
 - Friendship.
+- Work as a team.
+- Better solution skills.
 - The importance of going by the book.
 "To"
 - Be on time.
 - Be concentrated.
 - Realise about safety.
-- Better solution skills.
 - Apply concept in practical to real life including career path.
