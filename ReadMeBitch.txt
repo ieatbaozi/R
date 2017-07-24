@@ -15,3 +15,4 @@ Timeline : 1 Jun - 27 Jul
 
 Process :
 Requirement : An web application displays plots about power meter's diff-kWh with analysis. 
+https://medium.com/omarelgabrys-blog/software-engineering-software-process-and-software-process-models-part-2-4a9d06213fdc
