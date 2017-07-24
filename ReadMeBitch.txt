@@ -18,7 +18,7 @@ Process ->
 
 Requirements : An web application displays plots about main power meter's diff-kWh with analysis. 
 
-Design : 
+Design : https://github.com/ieatbaozi/R-Practicing/blob/master/UI%20report.png
 
 Implementation :
 - Do sql query data.
@@ -26,7 +26,8 @@ Implementation :
 (Just done data preparetion but during work in process was having a meeting and getting new requirements.)
 
 New Requirements : An web apllication displays plot about main power meter's diff-kWh and submeter's voltage-current minutely thorough report.
-Design :
+
+Design : https://github.com/ieatbaozi/R-Practicing/blob/master/design2.png (Make it simple.)
 
 Implementation : 
 - Split analysis visualization out for only education. 
