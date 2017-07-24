@@ -21,6 +21,7 @@ Requirements : An web application displays plots about main power meter's diff-k
 Design : 
 
 Implementation :
+- Do sql query data.
 - Do data preprocessing.
 (Just done data preparetion but during work in process was having a meeting and getting new requirements.)
 
@@ -36,9 +37,11 @@ Implementation :
 
 Verification : User testing for feedback and get new a little requirements to add submeter's daily diff-kWh data.
 
-Tools : Use - sql on MSSQL server
+Tools : Use - sql query on MSSQL server
 - Open source R on Rstudio
 - VB on Visual Studio
 - Bash on Ubuntu 16.04 Virtual machine simulated
 - Git on github.com for commiting files
 Romote the server on VNC viewer. Moreover, Learn many solutions on stackoverflow.com and github.com / 
+
+
