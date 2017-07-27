@@ -1,7 +1,13 @@
 How to launch R shiny web app on server :
 
 _____________________
-1. Install SQL server
+1. Change the unix time-zone
+
+#Go to 'System Settings' >> Personal : 'Language Support' >> set 'Regional Formats' to "English (United States)"
+#Then, to 'System Settings' >> System : 'Time & Date' >> Location: "Bangkok" (Automatically from the Internet)
+
+_____________________
+2. Install SQL server
 
 #sudo apt-get install -y curl
 #sudo apt-get update
@@ -12,7 +18,7 @@ sudo apt-get update
 sudo apt-get install -y mssql-server
 
 _____________________
-2. Install unix-ODBC
+3. Install unix-ODBC
 
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
@@ -23,7 +29,7 @@ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 source ~/.bashrc
 
 _____________________
-3. Install R and R-server
+4. Install R and R-server
 
 sudo apt-get install -y r-base
 sudo su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
@@ -40,7 +46,7 @@ sudo nano /usr/lib/R/etc/Renviron
 #set commenting to the line as '#R_LIBS_USER=${R_LIBS_USER-‘~/R/x86_64-pc-linux-gnu-library/3.2’}' 
 
 _____________________
-4. Install all packages used in the shiny web app
+5. Install all packages used in the shiny web app
 
 
 sudo chmod 777 /usr/local/lib/R/site-library
@@ -54,12 +60,6 @@ sudo apt-get install -y libcurl4-gnutls-dev
 sudo apt-get install -y libssl-dev
 sudo R CMD javareconf
 sudo su - -c "R -e \"install.packages(c('RJDBC', 'XLConnect', 'devtools', 'RJSONIO', 'sp', 'png', 'pixmap', 'mapdata', 'maptools', 'maps', 'rgeos','RODBC','lubridate','dplyr','ggplot2','plotly','scales','DT','shinyTime'), repos='https://cran.rstudio.com/')\""
-
-_____________________
-5. Change the unix time-zone
-
-#Go to 'System Settings' >> Personal : 'Language Support' >> set 'Regional Formats' to "English (United States)"
-#Then, to 'System Settings' >> System : 'Time & Date' >> Location: "Bangkok" (Automatically from the Internet)
 
 _____________________
 6. Get 'preserve_logs true;' to the 1st line in /etc/shiny-server/shiny-server.conf
