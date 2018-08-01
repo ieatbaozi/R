@@ -9,9 +9,9 @@ library(shinyTime)
 library(shiny)
 
 
-start.date <- "2017-04-01"
+start.date <- "2018-04-01"
 
-conn <- odbcDriverConnect('Driver={ODBC Driver 13 for SQL Server};Server=10.17.127.17;Database=MIT;Uid=sqlreader;Pwd=sqlReader')
+conn <- odbcDriverConnect('Driver={ODBC Driver 17 for SQL Server};Server=10.17.127.17;Database=MIT;Uid=sqlreader;Pwd=sqlReader')
 conn
 allmetername <- paste0("select PMMID,MeterName from MIT..PowerMeterMaster (NOLOCK)")
 all.metername <- sqlQuery(conn,allmetername)
@@ -21,8 +21,7 @@ all.metername$MeterName <- as.character(all.metername$MeterName)
 query.all <- paste0("select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,((kWh_import_H+kWh_import_L)/1000) as 'kWh',MIT..PowerMeterData.AddDate 
                     from MIT..PowerMeterData (NOLOCK) 
                     join MIT..PowerMeterMaster (NOLOCK) on MIT..PowerMeterData.PMMID = MIT..PowerMeterMaster.PMMID 
-                    where MIT..PowerMeterMaster.MeterName like 'MDB%' and MIT..PowerMeterData.AddDate between ('",start.date,"') and (GETDATE()) 
-                    order by AddDate DESC ")
+                    where MIT..PowerMeterMaster.MeterName like 'MDB%' and MIT..PowerMeterData.AddDate between ('",start.date,"') and (GETDATE()) ")
 
 data.all <- sqlQuery(conn, query.all)
 odbcClose(conn)
@@ -30,7 +29,7 @@ odbcClose(conn)
 
 colnames(data.all) <- c("PMMID","MeterName","kWh","DateTime")
 
-#data.all <- data.all[order(data.all$AddDate),]
+data.all <- data.all[order(data.all$DateTime),]
 meter.name <- c("MDB1-1", "MDB2-1", "MDB2-2", "MDB2-3", "MDB3-1", "MDB3-2", "MDB4-1", "MDB4-2", "MDB5-1", "MDB6-1", "MDB6-2", "MDB7-1", "MDB7-2")
 meter.name <- as.data.frame(meter.name)
 colnames(meter.name) <- "MeterName"
