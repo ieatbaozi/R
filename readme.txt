@@ -7,7 +7,7 @@ _____________________
 #Then, to 'System Settings' >> System : 'Time & Date' >> Location: "Bangkok" (Automatically from the Internet)
 
 _____________________
-2. Install SQL server
+2. Install SQL server - > https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-linux-2017
 
 #sudo apt-get install -y curl
 #sudo apt-get update
@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get install -y mssql-server
 
 _____________________
-3. Install unix-ODBC
+3. Install unix-ODBC - > https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
@@ -54,7 +54,7 @@ sudo chmod 777 /usr/local/lib/R/site-library
 sudo apt-get install -y r-cran-rjava
 sudo add-apt-repository -y ppa:openjdk-r/ppa  
 sudo apt-get update   
-sudo apt-get install -y openjdk-7-jdk  
+sudo apt-get install -y openjdk-8-jdk  
 sudo apt-get install -y libgeos-dev
 sudo apt-get install -y libcurl4-gnutls-dev
 sudo apt-get install -y libssl-dev
