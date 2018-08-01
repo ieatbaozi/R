@@ -84,11 +84,11 @@ shinyServer(function(input, output) {
     query.voltcurr <- paste0("select MIT..PowerMeterData.PMMID,MIT..PowerMeterMaster.MeterName,Voltage_L1_L2,Voltage_L2_L3,Voltage_L3_L1,Current_L1,Current_L2,Current_L3,MIT..PowerMeterData.AddDate,((kWh_import_H+kWh_import_L)/1000) as 'kWh'
                              from MIT..PowerMeterData (NOLOCK) 
                              join MIT..PowerMeterMaster (NOLOCK) on MIT..PowerMeterData.PMMID = MIT..PowerMeterMaster.PMMID 
-                             where MIT..PowerMeterMaster.MeterName like '",m,"' and MIT..PowerMeterData.AddDate between ('",l,"') and ('",o,"') 
-                             order by AddDate DESC ")
+                             where MIT..PowerMeterMaster.MeterName like '",m,"' and MIT..PowerMeterData.AddDate between ('",l,"') and ('",o,"') ")
     data_voltcurr <- sqlQuery(conn, query.voltcurr)
     odbcClose(conn)
     temp_data_voltcurr <- data_voltcurr
+    data_voltcurr <- data_voltcurr[order(data_voltcurr$AddDate),]
     data_voltcurr <- data_voltcurr[,-10]
     ################
     data.daily <- temp_data_voltcurr[,9:10]
